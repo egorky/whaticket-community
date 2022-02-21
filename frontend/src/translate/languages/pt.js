@@ -191,6 +191,7 @@ const messages = {
         form: {
           name: "Nome",
           color: "Cor",
+          dialogflow: "Dialogflow",
           greetingMessage: "Mensagem de saudação",
         },
         buttons: {
@@ -411,6 +412,7 @@ const messages = {
             resolve: "Encerrar Conversa",
             reopen: "Reabrir Conversa",
             accept: "Aceitar Conversa",
+            dialogflow: "Dialogflow",
           },
         },
       },
