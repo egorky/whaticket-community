@@ -431,6 +431,7 @@ const messages = {
       },
       ticketOptionsMenu: {
         delete: "Deletar",
+        useQueues: "Usar fila?",
         transfer: "Transferir",
         confirmationModal: {
           title: "Deletar a conversa do contato",
