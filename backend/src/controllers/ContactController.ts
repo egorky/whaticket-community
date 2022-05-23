@@ -14,6 +14,8 @@ import GetProfilePicUrl from "../services/WbotServices/GetProfilePicUrl";
 import AppError from "../errors/AppError";
 import GetContactService from "../services/ContactServices/GetContactService";
 import { getModelName } from "sequelize-typescript";
+import ToggleUseQueuesContactService from "../services/ContactServices/ToggleUseQueuesContactService";
+import ToggleUseDialogflowContactService from "../services/ContactServices/ToggleUseDialogflowContactService";
 
 type IndexQuery = {
   searchParam: string;
@@ -136,6 +138,40 @@ export const update = async (
   const { contactId } = req.params;
 
   const contact = await UpdateContactService({ contactData, contactId });
+
+  const io = getIO();
+  io.emit("contact", {
+    action: "update",
+    contact
+  });
+
+  return res.status(200).json(contact);
+};
+
+export const toggleUseQueue = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  const { contactId } = req.params;
+
+  const contact = await ToggleUseQueuesContactService({ contactId });
+
+  const io = getIO();
+  io.emit("contact", {
+    action: "update",
+    contact
+  });
+
+  return res.status(200).json(contact);
+};
+
+export const toggleUseDialogflow = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  const { contactId } = req.params;
+
+  const contact = await ToggleUseDialogflowContactService({ contactId });
 
   const io = getIO();
   io.emit("contact", {
