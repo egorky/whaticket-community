@@ -20,6 +20,8 @@ import useTickets from "../../hooks/useTickets";
 import alertSound from "../../assets/sound.mp3";
 import { AuthContext } from "../../context/Auth/AuthContext";
 
+import { Can } from "../../components/Can";
+
 const useStyles = makeStyles(theme => ({
 	tabContainer: {
 		overflowY: "auto",
@@ -188,16 +190,23 @@ const NotificationsPopOver = () => {
 
 	return (
 		<>
-			<IconButton
-				onClick={handleClick}
-				ref={anchorEl}
-				aria-label="Open Notifications"
-				color="inherit"
-			>
-				<Badge badgeContent={notifications.length} color="secondary">
-					<ChatIcon />
-				</Badge>
-			</IconButton>
+                        <Can
+                            role={user.profile}
+                            perform="maindrawer:notifications"
+                            yes={() => (
+			        <IconButton
+				     onClick={handleClick}
+				     ref={anchorEl}
+				     aria-label="Open Notifications"
+				     color="inherit"
+			        >
+				     <Badge badgeContent={notifications.length} color="secondary">
+				        	<ChatIcon />
+				     </Badge>
+			        </IconButton>
+                          )}
+                        />
+
 			<Popover
 				disableScrollLock
 				open={isOpen}
@@ -213,6 +222,7 @@ const NotificationsPopOver = () => {
 				classes={{ paper: classes.popoverPaper }}
 				onClose={handleClickAway}
 			>
+
 				<List dense className={classes.tabContainer}>
 					{notifications.length === 0 ? (
 						<ListItem>
@@ -226,7 +236,9 @@ const NotificationsPopOver = () => {
 						))
 					)}
 				</List>
+
 			</Popover>
+
 		</>
 	);
 };

@@ -76,9 +76,15 @@ const TicketOptionsMenu = ({ ticket, menuOpen, handleClose, anchorEl }) => {
 				open={menuOpen}
 				onClose={handleClose}
 			>
-				<MenuItem onClick={handleOpenTransferModal}>
-					{i18n.t("ticketOptionsMenu.transfer")}
-				</MenuItem>
+                                <Can
+                                        role={user.profile}
+                                        perform="ticket-options:transferTicket"
+                                        yes={() => (
+                                        <MenuItem onClick={handleOpenTransferModal}>
+                                                {i18n.t("ticketOptionsMenu.transfer")}
+                                        </MenuItem>
+                                        )}
+                                />
 				{ticket.queue && <MenuItem>
 					<Switch
 						size="small"

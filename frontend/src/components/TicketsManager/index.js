@@ -258,15 +258,19 @@ const TicketsManager = () => {
         </Paper>
       </TabPanel>
 
-      <TabPanel value={tab} name="pending" className={classes.ticketsWrapper}>
-        <TicketsList
-          status="pending"
-          showAll={true}
-          selectedQueueIds={selectedQueueIds}
-        />
-      </TabPanel>
-
-      
+      <Can
+          role={user.profile}
+          perform="tickets:showPending"
+          yes={() => (
+              <TabPanel value={tab} name="pending" className={classes.ticketsWrapper}>
+                  <TicketsList
+                    status="pending"
+                    showAll={true}
+                    selectedQueueIds={selectedQueueIds}
+                  />
+              </TabPanel>
+          )}
+      />
       
       <TabPanel value={tab} name="closed" className={classes.ticketsWrapper}>
         <TicketsList
